@@ -1,5 +1,17 @@
 # OpenRouter API Client Library
 
+> **Production-ready Rust client for OpenRouter API** — type-state builder pattern, zero-memory API keys, streaming, MCP support, and enterprise-grade retry logic
+
+
+
+<p align="center">
+  <a href="https://github.com/hmzainjamil/openrouter_api/stargazers"><img src="https://img.shields.io/github/stars/hmzainjamil/openrouter_api?style=for-the-badge&labelColor=555&color=white" alt="Stars"></a>
+  <a href="https://github.com/hmzainjamil/openrouter_api/network/members"><img src="https://img.shields.io/github/forks/hmzainjamil/openrouter_api?style=for-the-badge&labelColor=555&color=white" alt="Forks"></a>
+  <a href="https://github.com/hmzainjamil/openrouter_api/issues"><img src="https://img.shields.io/github/issues/hmzainjamil/openrouter_api?style=for-the-badge&labelColor=555&color=white" alt="Issues"></a>
+  <a href="https://github.com/hmzainjamil/openrouter_api/pulls"><img src="https://img.shields.io/github/issues-pr/hmzainjamil/openrouter_api?style=for-the-badge&labelColor=555&color=white" alt="PRs"></a>
+  <a href="https://github.com/hmzainjamil/openrouter_api/commits"><img src="https://img.shields.io/github/last-commit/hmzainjamil/openrouter_api?style=for-the-badge&labelColor=555&color=white" alt="Last Commit"></a>
+</p>
+
 A production-ready Rust client for the OpenRouter API with comprehensive security, ergonomic design, and extensive testing. The library uses a type‑state builder pattern for compile-time configuration validation, ensuring robust and secure API interactions.
 
 ## Features
@@ -1097,3 +1109,36 @@ Retrying chat_completion request (2/3) after 1250 ms (base: 1000 ms, jitter: 25.
 - [Model Context Protocol Specification](https://modelcontextprotocol.io/specification/2025-03-26/)
 
 ---
+
+---
+
+## ☠️ STARTUPS / BUSINESSES
+
+Why teams choose this over the official SDKs:
+
+| Requirement | This Library | Alternative |
+|-------------|-------------|-------------|
+| **Zero-memory API keys** | Auto-zeroed on drop via `zeroize` | Most SDKs keep keys in heap |
+| **Compile-time config** | Type-state builder — misconfigured clients don't compile | Runtime panics in production |
+| **Streaming safety** | Buffer limits + backpressure — no OOM on large responses | Uncapped buffers in naive clients |
+| **Retry with jitter** | Exponential backoff, configurable — built in | DIY in app layer |
+| **MCP integration** | Full JSON-RPC client for Model Context Protocol | Not available elsewhere in Rust |
+| **Multi-model routing** | Provider preferences, fallbacks, allow/deny lists | One model per request |
+| **Structured outputs** | JSON Schema validation baked in | Post-processing required |
+| **Enterprise audit** | Analytics API + activity filtering + pagination | No observability layer |
+
+**Who deploys this:**
+- AI API aggregators routing millions of tokens/day
+- Security-conscious enterprises needing memory-safe LLM clients
+- Rust-native backend teams building agent infrastructure
+- Startups needing production-grade retry/failover without custom code
+
+---
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=hmzainjamil/openrouter_api&type=Date)](https://star-history.com/#hmzainjamil/openrouter_api&Date)
+
+---
+
+Built by [HMZ](https://github.com/hmzainjamil)
