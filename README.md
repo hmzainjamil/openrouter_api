@@ -14,6 +14,42 @@
 
 A production-ready Rust client for the OpenRouter API with comprehensive security, ergonomic design, and extensive testing. The library uses a type‑state builder pattern for compile-time configuration validation, ensuring robust and secure API interactions.
 
+
+## CONCEPTS
+
+| Concept | Description |
+|---|---|
+| **Type-State Builder** | Compile-time config validation — missing fields are type errors, not runtime panics |
+| **Zeroize** | API keys zeroed in memory on drop via the `zeroize` crate — no key leaks in heap dumps |
+| **Exponential Backoff** | Configurable retry with jitter for 429/5xx — production-safe by default |
+| **Streaming Safety** | Buffer limits + backpressure on SSE streams — prevents OOM on runaway responses |
+| **Provider Preferences** | Per-request model routing, fallbacks, and load-balancing across OpenRouter providers |
+| **Guardrails API** | CRUD + key/member assignment for management API keys — full lifecycle in one client |
+| **Bounded Response Reading** | Hard 10 MB cap on response bodies — prevents memory attacks from malicious servers |
+| **MCP Client** | Built-in Model Context Protocol client — call MCP tool servers from any Rust async runtime |
+
+## 🔥 Hot Commands
+
+```bash
+# Add to Cargo.toml
+# openrouter_api = { git = "https://github.com/regenrek/openrouter_api" }
+
+# Quick single call
+cargo run --example quick_chat
+
+# Streaming response
+cargo run --example streaming_chat
+
+# Run full test suite
+cargo test --all-features
+
+# Check with production defaults (rate-limit safe)
+OPENROUTER_API_KEY=sk-or-... cargo run --example production_client
+```
+
+## ■ tip
+> Use `OpenRouterClient::production()` for real workloads — it sets 30s timeout, 3 retries, and response size limits automatically. Don't roll your own retry loop. Source: [Security README section](https://github.com/hmzainjamil/openrouter_api#security)
+
 ## Features
 
 ### 🏗️ **Architecture & Safety**
@@ -1142,3 +1178,4 @@ Why teams choose this over the official SDKs:
 ---
 
 Built by [HMZ](https://github.com/hmzainjamil)
+
