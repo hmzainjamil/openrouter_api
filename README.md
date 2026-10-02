@@ -44,29 +44,25 @@ Set an API key in your shell. The client helper reads `OPENROUTER_API_KEY`, then
 export OPENROUTER_API_KEY='your-key'
 ```
 
-Basic asynchronous request, following the crate's typed models:
+Basic asynchronous request, using the public API in this checkout:
 
 ```rust
-use openrouter_api::types::chat::{ChatRole, Message};
 use openrouter_api::{OpenRouterClient, Result};
 
 #[tokio::main]
 async fn main() -> Result<()> {
     let client = OpenRouterClient::from_env()?;
-    let messages = vec![Message::text(ChatRole::User, "Say hello.")];
+    let text = client
+        .chat()?
+        .simple_completion("openai/gpt-4o", "Say hello.")
+        .await?;
 
-    // API method names and request types are defined by this checkout.
-    let response = client.chat().completion(
-        "openai/gpt-4o",
-        messages,
-    ).await?;
-
-    println!("{response:?}");
+    println!("{text}");
     Ok(())
 }
 ```
 
-Check the current client and chat module signatures before copying an example into an application. For a fuller structured-output example, see [examples/structured_output.rs](./examples/structured_output.rs). It makes a real provider request when run and needs a valid key, network access, and a supported model.
+This example makes a real provider request when run. It needs a valid key, network access, and a supported model. For structured output, see [examples/structured_output.rs](./examples/structured_output.rs).
 
 ## MCP client
 
@@ -94,6 +90,8 @@ The crate also exports `MCPClient`. The checked-in [MCP example](./examples/mcp_
 | [tests/type_safety/README.md](./tests/type_safety/README.md) | Compile-fail test guide |
 | [CONTRIBUTING.md](./CONTRIBUTING.md) | Contribution workflow |
 | [CHANGELOG.md](./CHANGELOG.md) | Recorded changes |
+| [SECURITY_ADVISORY.md](./SECURITY_ADVISORY.md) | Historical security notes |
+| [docs/README.md](./docs/README.md) | Supporting docs and data artifacts |
 | [LICENSE](./LICENSE) | License text |
 
 The `docs/` directory contains supporting SQL and audit artifacts. It is not a generated API documentation site. Rust API documentation is generated from source comments with Cargo.
